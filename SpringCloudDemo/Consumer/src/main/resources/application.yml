@@ -1,0 +1,11 @@
+server:
+  port: 8763
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/ #×¢²áÖĞĞÄµÄÍøÖ·
+spring:
+  application:
+    name: consumer
