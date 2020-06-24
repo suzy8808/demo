@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.bobo.clockin.mapper.ClockInLogMapper" >
+  <resultMap id="BaseResultMap" type="org.bobo.clockin.bean.ClockInLog" >
+    <id column="cin_id" property="cinId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+    <result column="end_time" property="endTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+    <result column="create_time" property="createTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+    <result column="update_time" property="updateTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cin_id, user_id, start_time, end_time, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from clockin_log
+    where cin_id = #{cinId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from clockin_log
+    where cin_id = #{cinId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.bobo.clockin.bean.ClockInLog" >
+    insert into clockin_log (cin_id, user_id, start_time, 
+      end_time, 
+      create_time, 
+      update_time
+      )
+    values (#{cinId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{startTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler}, 
+      #{endTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler}, 
+      #{createTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler}, 
+      #{updateTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.bobo.clockin.bean.ClockInLog" >
+    insert into clockin_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cinId != null" >
+        cin_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cinId != null" >
+        #{cinId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.bobo.clockin.bean.ClockInLog" >
+    update clockin_log
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+    </set>
+    where cin_id = #{cinId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.bobo.clockin.bean.ClockInLog" >
+    update clockin_log
+    set user_id = #{userId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      end_time = #{endTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      create_time = #{createTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      update_time = #{updateTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler}
+    where cin_id = #{cinId,jdbcType=INTEGER}
+  </update>
+</mapper>

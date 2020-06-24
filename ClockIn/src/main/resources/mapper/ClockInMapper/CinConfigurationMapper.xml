@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.bobo.clockin.mapper.cinmapper.CinConfigurationMapper" >
+  <resultMap id="BaseResultMap" type="org.bobo.clockin.bean.Configuration" >
+    <id column="key" property="key" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from configuration;
+  </select>
+</mapper>

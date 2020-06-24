@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.bobo.clockin.mapper.ConfigurationMapper" >
+  <resultMap id="BaseResultMap" type="org.bobo.clockin.bean.Configuration" >
+    <id column="key" property="key" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    key, value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from configuration
+    where key = #{key,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from configuration
+    where key = #{key,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="org.bobo.clockin.bean.Configuration" >
+    insert into configuration (key, value)
+    values (#{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.bobo.clockin.bean.Configuration" >
+    insert into configuration
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        key,
+      </if>
+      <if test="value != null" >
+        value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="key != null" >
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.bobo.clockin.bean.Configuration" >
+    update configuration
+    <set >
+      <if test="value != null" >
+        value = #{value,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where key = #{key,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.bobo.clockin.bean.Configuration" >
+    update configuration
+    set value = #{value,jdbcType=VARCHAR}
+    where key = #{key,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.bobo.clockin.mapper.cinmapper.CinSubsidyMapper" >
+  <resultMap id="BaseResultMap" type="org.bobo.clockin.bean.Subsidy" >
+    <id column="ss_id" property="ssId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="subsidy" property="subsidy" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.BigDecimalTypeHandler" />
+    <result column="ss_year_month" property="ssYearMonth" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+    <result column="update_time" property="updateTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+  </resultMap>
+  <select id="selectByUidAndYearMonth" resultMap="BaseResultMap">
+    select * from subsidy where user_id=#{userId} and ss_year_month=#{yearMonth}
+  </select>
+</mapper>

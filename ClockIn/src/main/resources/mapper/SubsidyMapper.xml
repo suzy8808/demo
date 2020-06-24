@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.bobo.clockin.mapper.SubsidyMapper" >
+  <resultMap id="BaseResultMap" type="org.bobo.clockin.bean.Subsidy" >
+    <id column="ss_id" property="ssId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="subsidy" property="subsidy" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.BigDecimalTypeHandler" />
+    <result column="ss_year_month" property="ssYearMonth" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+    <result column="update_time" property="updateTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ss_id, user_id, subsidy, ss_year_month, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from subsidy
+    where ss_id = #{ssId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from subsidy
+    where ss_id = #{ssId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="org.bobo.clockin.bean.Subsidy" >
+    insert into subsidy (ss_id, user_id, subsidy, 
+      ss_year_month, create_time, 
+      update_time
+      )
+    values (#{ssId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{subsidy,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.BigDecimalTypeHandler}, 
+      #{ssYearMonth,jdbcType=VARCHAR}, #{createTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler}, 
+      #{updateTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.bobo.clockin.bean.Subsidy" >
+    insert into subsidy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ssId != null" >
+        ss_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="subsidy != null" >
+        subsidy,
+      </if>
+      <if test="ssYearMonth != null" >
+        ss_year_month,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ssId != null" >
+        #{ssId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="subsidy != null" >
+        #{subsidy,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.BigDecimalTypeHandler},
+      </if>
+      <if test="ssYearMonth != null" >
+        #{ssYearMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.bobo.clockin.bean.Subsidy" >
+    update subsidy
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="subsidy != null" >
+        subsidy = #{subsidy,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.BigDecimalTypeHandler},
+      </if>
+      <if test="ssYearMonth != null" >
+        ss_year_month = #{ssYearMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      </if>
+    </set>
+    where ss_id = #{ssId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.bobo.clockin.bean.Subsidy" >
+    update subsidy
+    set user_id = #{userId,jdbcType=INTEGER},
+      subsidy = #{subsidy,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.BigDecimalTypeHandler},
+      ss_year_month = #{ssYearMonth,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler},
+      update_time = #{updateTime,jdbcType=OTHER,typeHandler=org.apache.ibatis.type.LocalDateTimeTypeHandler}
+    where ss_id = #{ssId,jdbcType=INTEGER}
+  </update>
+</mapper>

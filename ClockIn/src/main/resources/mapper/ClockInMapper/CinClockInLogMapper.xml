@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.bobo.clockin.mapper.cinmapper.CinClockInLogMapper" >
+  <resultMap id="BaseResultMap" type="org.bobo.clockin.bean.ClockInLog" >
+    <id column="cin_id" property="cinId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+    <result column="end_time" property="endTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+    <result column="create_time" property="createTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+    <result column="update_time" property="updateTime" jdbcType="OTHER" typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler" />
+  </resultMap>
+
+  <select id="selectByUidAndToday" resultMap="BaseResultMap">
+    select * from clockin_log where user_id=#{userId} and start_time &gt;= #{today};
+  </select>
+
+  <select id="selectByUidAndTimeRange" resultMap="BaseResultMap">
+    select * from clockin_log where user_id=#{userId} and start_time &gt;= #{start} and start_time &lt;= #{end};
+  </select>
+
+</mapper>
